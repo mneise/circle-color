@@ -6,7 +6,7 @@ A small ClojureScript project to try out JS transforms and JS module support.
 
 This ClojureScript project uses React to change the color of a circle via an input field.
 
-![circle-color](http://g.recordit.co/JHZkwcEBoX.gif)
+![circle-color](http://g.recordit.co/bKpr6f7FHT.gif)
 
 ## Setup
 
@@ -45,7 +45,7 @@ Before building it, we need to change the version of the Google Closure compiler
 </dependency>
 ```
 
-Change the version from `v20150729` to `1.0-SNAPSHOT`. You entry now should look like this:
+Change the version from `v20150729` to `1.0-SNAPSHOT`. Your entry now should look like this:
 
 ```
 <dependency>
@@ -61,10 +61,20 @@ We can now build a new version of the ClojureScript compiler:
 $ ./script/build
 ```
 
-Assuming you have already cloned this project, change the ClojureScript version in this project's `project.clj` file from `1.7.48` to the version we just build, e.g. `1.7.68`, and build the project:
+Assuming you have already cloned this project, change the ClojureScript version in this project's `project.clj` file from `1.7.48` to the version we just build, e.g. `1.7.68`:
 
 ```
 $ cd circle-color
+```
+
+```clojure
+[org.clojure/clojurescript "1.7.68" :classifier "aot"
+ :exclusion [org.clojure/data.json]]
+```
+
+Now build the project and open the `index.html` file to see the result:
+
+```
 $ ./scripts/build
 $ open resources/public/index.html
 ```
