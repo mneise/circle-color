@@ -2,20 +2,30 @@
 
 A small ClojureScript project to try out JS transforms and JS module support.
 
+## Description
+
+This ClojureScript project uses React to change the color of a circle via an input field.
+
+![circle-color](http://g.recordit.co/JHZkwcEBoX.gif)
+
 ## Setup
 
-For this example to work, you need to build your own version of the Google Closure compiler and the ClojureScript compiler. Go ahead and clone my fork of the Google Closure compiler and then check out the `umd-support` branch:
+For this example, you need to build your own version of the Google Closure compiler and the ClojureScript compiler. Go ahead and clone my fork of the Google Closure compiler and then check out the `umd-support` branch:
 
 ```
 $ git clone git@github.com:mneise/closure-compiler.git
-$ cd closure-compile
+$ cd closure-compiler
 $ git checkout -t origin/umd-support
 ```
 
-Let's build the Google Closure compiler and install a new version into our local maven repository:
+Let's build the Google Closure compiler and install a new version into our local maven repository. If this fails, try option 2.
 
 ```
+// option 1
 $ mvn install
+// option 2
+$ ant jar
+$ mvn install:install-file -Dfile=build/compiler.jar -DgroupId=com.google.javascript -DartifactId=closure-compiler -Dversion=1.0-SNAPSHOT -Dpackaging=jar
 ```
 
 This should have installed the version `1.0-SNAPSHOT` of the Google Closure compiler. Now we need to build our own version of the ClojureScript compiler. Let's check out the project:
