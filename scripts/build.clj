@@ -27,6 +27,5 @@
                      :provides ["Circle"]
                      :module-type :commonjs
                      :preprocess :jsx}]
-     :optimizations :simple
      :closure-warnings {:non-standard-jsdoc :off}})
   (println "... done. Elapsed" (/ (- (System/nanoTime) start) 1e9) "seconds"))
