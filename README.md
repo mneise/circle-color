@@ -1,56 +1,64 @@
 # circle-color
 
-FIXME: Write a one-line description of your library/project.
-
-## Overview
-
-FIXME: Write a paragraph about the library/project and highlight its goals.
+A small ClojureScript project to try out JS transforms and JS module support.
 
 ## Setup
 
-Build your project once in dev mode with the following script and then open `index.html` in your browser.
+For this example to work, you need to build your own version of the Google Closure compiler and the ClojureScript compiler. Go ahead and clone my fork of the Google Closure compiler and then check out the `umd-support` branch:
 
-    ./scripts/build
-
-To auto build your project in dev mode:
-
-    ./script/watch
-
-To start an auto-building Node REPL (requires
-[rlwrap](http://utopia.knoware.nl/~hlub/uck/rlwrap/), on OS X
-installable via brew):
-
-    ./scripts/repl
-
-To get source map support in the Node REPL:
-
-    lein npm install
-    
-To start a browser REPL:
-    
-1. Uncomment the following lines in src/circle_color/core.cljs:
-```clojure
-;; (defonce conn
-;;   (repl/connect "http://localhost:9000/repl"))
 ```
-2. Run `./scripts/brepl`
-3. Browse to `http://localhost:9000` (you should see `Hello world!` in the web console)
-4. (back to step 3) you should now see the REPL prompt: `cljs.user=>`
-5. You may now evaluate ClojureScript statements in the browser context.
-    
-For more info using the browser as a REPL environment, see
-[this](https://github.com/clojure/clojurescript/wiki/The-REPL-and-Evaluation-Environments#browser-as-evaluation-environment).
-    
-Clean project specific out:
+$ git clone git@github.com:mneise/closure-compiler.git
+$ cd closure-compile
+$ git checkout -t origin/umd-support
+```
 
-    lein clean
-     
-Build a single release artifact with the following script and then open `index_release.html` in your browser.
+Let's build the Google Closure compiler and install a new version into our local maven repository:
 
-    ./scripts/release
+```
+$ mvn install
+```
+
+This should have installed the version `1.0-SNAPSHOT` of the Google Closure compiler. Now we need to build our own version of the ClojureScript compiler. Let's check out the project:
+
+```
+$ git clone git@github.com:clojure/clojurescript.git
+$ cd clojurescript
+```
+
+Before building it, we need to change the version of the Google Closure compiler to the one we just build. Open the file `pom.template.xml` and find the dependency for the Google Closure compiler. The file should contain an entry that looks similar to this:
+
+```
+<dependency>
+    <groupId>com.google.javascript</groupId>
+    <artifactId>closure-compiler</artifactId>
+    <version>v20150729</version>
+</dependency>
+```
+
+Change the version from `v20150729` to `1.0-SNAPSHOT`. You entry now should look like this:
+
+```
+<dependency>
+    <groupId>com.google.javascript</groupId>
+    <artifactId>closure-compiler</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
+We can now build a new version of the ClojureScript compiler:
+
+```
+$ ./script/build
+```
+
+Assuming you have already cloned this project, change the ClojureScript version in this project's `project.clj` file from `1.7.48` to the version we just build, e.g. `1.7.68`, and build the project:
+
+```
+$ cd circle-color
+$ ./scripts/build
+$ open resources/public/index.html
+```
 
 ## License
-
-Copyright © 2015 FIXME
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
