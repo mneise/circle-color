@@ -28,6 +28,3 @@
 (render
  (createElement Container)
  (.getElementById js/document "app"))
-
-
-
