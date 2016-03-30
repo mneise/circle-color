@@ -6,8 +6,6 @@ A small ClojureScript project to try out JS transforms and JS module support.
 
 This ClojureScript project uses React to change the color of a circle via an input field.
 
-![circle-color](http://g.recordit.co/bKpr6f7FHT.gif)
-
 ## Setup
 
 Build the project with:
